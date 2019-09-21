@@ -3,8 +3,7 @@ import { Text, View, StyleSheet, Button, AsyncStorage } from "react-native";
 import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
 import { BarCodeScanner } from "expo-barcode-scanner";
-import { StackActions, NavigationActions } from 'react-navigation';
-
+import { StackActions, NavigationActions } from "react-navigation";
 
 import { get } from "../utils/apiHelper";
 
@@ -57,29 +56,35 @@ export default class QRScanner extends React.Component {
     );
   }
 
-  handleBarCodeScanned = ({ type, data: accountId }) => {
+  handleBarCodeScanned = async ({ type, data: accountId }) => {
     this.setState({ isFetching: true });
-    //const account = "7f60df74-fa27-4018-b896-d15533572327";
-    get(`api.td-davinci.com/api/accounts/${accountId}`)
-      .then(response => {
-        const { relatedCustomerId } = response.result.bankAccount;
-        get(`api.td-davinci.com/api/customers/${relatedCustomerId}`).then((result) => {
-          AsyncStorage.setItem('recipient', JSON.stringify(result));
-          this.props.navigation.dispatch(
-            StackActions.reset({
-              index: 0,
-              actions: [NavigationActions.navigate({ routeName: 'DonateFund' })],
-            })
-          );
-        });
-      })
-      .catch(response => {
-        alert(`Error: ${JSON.stringify(response)}`);
-      })
-      .then(() => {
-        this.setState({ isFetching: false });
-      });
+    try {
+      //const accountId = "7f60df74-fa27-4018-b896-d15533572327";
+      const accountResponse = await get(
+        `api.td-davinci.com/api/accounts/${accountId}`
+      );
+      const {
+        result: {
+          bankAccount: { relatedCustomerId }
+        }
+      } = accountResponse;
 
+      const customerResponse = await get(
+        `api.td-davinci.com/api/customers/${relatedCustomerId}`
+      );
+
+      const { result } = customerResponse;
+      await AsyncStorage.setItem("recipient", JSON.stringify(result));
+      this.props.navigation.dispatch(
+        StackActions.reset({
+          index: 0,
+          actions: [NavigationActions.navigate({ routeName: "DonateFund" })]
+        })
+      );
+    } catch (exception) {
+      alert(`Exception: ${JSON.stringify(exception)}`);
+    }
+    this.setState({ isFetching: false });
     this.setState({ scanned: true });
   };
 }

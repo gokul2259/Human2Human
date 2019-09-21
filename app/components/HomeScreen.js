@@ -7,10 +7,21 @@ import { StackActions, NavigationActions } from 'react-navigation';
 import Splash from './Splash';
 
 export default class HomeScreen extends React.Component {
-
-  componentDidMount() {
+  async componentDidMount() {
     AsyncStorage.multiSet([['recipient', '']]);
+
+    // redirect to QRScanner if already logged in
+    const sender = AsyncStorage.getItem('sender');
+    if (sender) {
+      this.props.navigation.dispatch(
+        StackActions.reset({
+          index: 0,
+          actions: [NavigationActions.navigate({ routeName: 'QRScanner' })],
+        })
+      );
+    }
   }
+
 
   render() {
     return (

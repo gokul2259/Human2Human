@@ -7,10 +7,10 @@ import Splash from './Splash';
 
 export default class HomeScreen extends React.Component {
   async componentDidMount() {
-    AsyncStorage.multiSet([['recipient', '']]);
+    await AsyncStorage.multiSet([['recipient', '']]);
 
     // redirect to QRScanner if already logged in
-    const sender = AsyncStorage.getItem('sender');
+    const sender = await AsyncStorage.getItem('sender');
     if (sender) {
       this.props.navigation.dispatch(
         StackActions.reset({

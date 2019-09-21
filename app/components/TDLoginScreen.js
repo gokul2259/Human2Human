@@ -19,13 +19,12 @@ export default class TDLoginScreen extends React.Component {
       const customer = await get(api);
 
       // save in app state
-      AsyncStorage.setItem('sender', customer.result);
-      alert(JSON.stringify(customer.result));
+      AsyncStorage.setItem('sender', JSON.stringify(customer.result));
       // go to QRScanner
       this.props.navigation.dispatch(
         StackActions.reset({
           index: 0,
-          actions: [NavigationActions.navigate({ routeName: 'Home' })],
+          actions: [NavigationActions.navigate({ routeName: 'QRScanner' })],
         })
       );
     } catch (error) {

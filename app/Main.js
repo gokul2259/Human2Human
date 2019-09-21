@@ -2,6 +2,7 @@ import { createAppContainer, StackActions, NavigationActions, createStackNavigat
 
 import HomeScreen from './components/HomeScreen'
 import TDLoginScreen from './components/TDLoginScreen'
+import QRScanner from './components/QRScanner'
 
 const AppNavigator = createStackNavigator({
   Home: {
@@ -10,6 +11,9 @@ const AppNavigator = createStackNavigator({
   TDLogin: {
     screen: TDLoginScreen,
   },
+  QRScanner: {
+    screen: QRScanner,
+  }
 }, {
     initialRouteName: 'Home',
     mode: 'modal',

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { View, StyleSheet, AsyncStorage } from 'react-native';
 import { Button } from 'react-native-elements';
 import Constants from 'expo-constants';
 import { StackActions, NavigationActions } from 'react-navigation';
@@ -7,6 +7,11 @@ import { StackActions, NavigationActions } from 'react-navigation';
 import Splash from './Splash';
 
 export default class HomeScreen extends React.Component {
+
+  componentDidMount() {
+    AsyncStorage.multiSet([['recipient', '']]);
+  }
+
   render() {
     return (
       <View style={styles.container}>

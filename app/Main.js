@@ -1,21 +1,29 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Donate from './components/Donate';
+import { View, Text, Button } from 'react-native';
+import { createAppContainer, StackActions, NavigationActions, createStackNavigator } from 'react-navigation'; // Version can be specified in package.json
 
-export default function Main() {
-  return (
-    <View style={styles.container}>
-      <Donate />
-      <Text>Human2Human</Text>
-    </View>
-  );
+import HomeScreen from './components/HomeScreen'
+import TDLoginScreen from './components/TDLoginScreen'
+
+class DetailsScreen extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Details Screen</Text>
+      </View>
+    );
+  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const AppNavigator = createStackNavigator({
+  Home: {
+    screen: HomeScreen,
   },
+  TDLogin: {
+    screen: TDLoginScreen,
+  },
+}, {
+    initialRouteName: 'Home',
 });
+
+export default createAppContainer(AppNavigator);

@@ -38,6 +38,7 @@ You are now ready to begin testing!
 1. Go to [snack.expo.io](https://snack.expo.io/)
 2. Click the three vertical ellipses to the right of the `Project` section header in the left navigation bar to open the project options and select `Import git repository`
 3. Enter the URL for this repo and click `Import repository`
+4. Run the app on your chosen simulator
 
 ## QR Codes for testing
 

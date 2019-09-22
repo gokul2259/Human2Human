@@ -3,13 +3,10 @@ import { Dimensions } from "react-native";
 module.exports = {
   colorVars: {
     appColor: '#FFFFFF',
-  },
-  dimenstions: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
+    primaryColor: '#FA9153',
   },
   recipientsAvatar: {
-    male: 'avatar-male',
-    female: 'avatar-female',  
+    male: '../../assets/avatar-male.png',
+    female: '../../assets/avatar-female.png',
   }
 };

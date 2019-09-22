@@ -5,7 +5,7 @@ import Constants from 'expo-constants';
 import { StackActions, NavigationActions } from 'react-navigation';
 import Splash from './Splash';
 
-export default class HomeScreen extends React.Component {
+export default class SplashScreen extends React.Component {
   async componentDidMount() {
     await AsyncStorage.clear();
     await AsyncStorage.multiSet([['recipient', '']]);
@@ -20,6 +20,28 @@ export default class HomeScreen extends React.Component {
         })
       );
     }
+     const redirectToQRScanner = () =>
+      this.props.navigation.dispatch(
+        StackActions.reset({
+          index: 0,
+          actions: [NavigationActions.navigate({ routeName: 'QRScanner' })],
+        })
+      );
+
+    const redirectToLogin = () =>
+      this.props.navigation.dispatch(
+        StackActions.reset({
+          index: 0,
+          actions: [NavigationActions.navigate({ routeName: 'TDLogin' })],
+        })
+      );
+
+    // redirect to QRScanner if already logged in
+    if (sender) {
+      setTimeout(redirectToQRScanner, 1500)
+    } else {
+      setTimeout(redirectToLogin, 1500)
+    }
   }
 
 
@@ -27,18 +49,6 @@ export default class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Splash />
-        <Button
-          style={styles.button}
-          title="TD Login"
-          onPress={() => {
-            this.props.navigation.dispatch(
-              StackActions.reset({
-                index: 0,
-                actions: [NavigationActions.navigate({ routeName: 'TDLogin' })],
-              })
-            );
-          }}
-        />
       </View>
     );
   }

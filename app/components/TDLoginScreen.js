@@ -35,9 +35,14 @@ export default class TDLoginScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text h1 style={styles.text}>
-          Login with TD
-        </Text>
+        <View>
+          <Text h1 style={styles.text}>
+            Login with TD
+          </Text>
+          <Text h4>
+            If you have a banking profile or online banking with TD, login here.
+          </Text>
+        </View>
         <Button
           buttonStyle={styles.button}
           title="Login"
@@ -59,6 +64,7 @@ const styles = StyleSheet.create({
   text: {
     textAlign: 'center',
     color: '#1f5237',
+    marginBottom: 64,
   },
   button: {
     backgroundColor: '#1c8911',

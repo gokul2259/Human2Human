@@ -20,10 +20,13 @@ const fetchJSON = (api, options = {}) =>
 const get = async (api, options = {}) =>
   await fetchJSON(api, { ...options, method: "GET" });
 
-const post = async (api, options = {}) => {
+const getNonAsync = (api, options = {}) =>
+  fetchJSON(api, { ...options, method: "GET" });
+
+const post = (api, options = {}) => {
   const { headers = {} } = options;
 
-  return await fetchJSON(api, {
+  return fetchJSON(api, {
     ...options,
     method: "POST",
     headers: {
@@ -39,5 +42,6 @@ const postFormData = async (api, { body = {} } = {}) =>
 
 module.exports = {
   get,
+  getNonAsync,
   post
 };

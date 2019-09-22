@@ -38,9 +38,9 @@ export default class SplashScreen extends React.Component {
 
     // redirect to QRScanner if already logged in
     if (sender) {
-      setTimeout(redirectToQRScanner, 1)
+      setTimeout(redirectToQRScanner, 2000)
     } else {
-      setTimeout(redirectToLogin, 1)
+      setTimeout(redirectToLogin, 2000)
     }
   }
 

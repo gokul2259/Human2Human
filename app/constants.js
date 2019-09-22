@@ -9,7 +9,7 @@ module.exports = {
     height: Dimensions.get('window').height,
   },
   recipientsAvatar: {
-    male: '../assests/avatar-male.png',
-    female: '../assests/avatar-female.png',  
+    male: '/assests/avatar-male.png',
+    female: '/assests/avatar-female.png',  
   }
 };

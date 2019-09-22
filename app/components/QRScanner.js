@@ -84,7 +84,7 @@ export default class QRScanner extends React.Component {
       );
     } catch (exception) {
       alert(
-        `Invalid QR code: the QR is not associated with TD customer profile`
+        `Invalid QR code: the QR is not associated with a TD customer profile`
       );
       this.setState({ isFetching: false });
       this.setState({ scanned: true });

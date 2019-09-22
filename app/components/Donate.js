@@ -1,11 +1,12 @@
 import React from 'react';
-import { ActivityIndicator, AsyncStorage, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, AsyncStorage, StyleSheet, View, ScrollView } from 'react-native';
 import { Badge, Avatar, Text, Slider, Button } from 'react-native-elements';
 import { StackActions, NavigationActions } from "react-navigation";
 import NumberFormat from 'react-number-format';
 
 import { post } from "../utils/apiHelper";
 import { colorVars, recipientsAvatar } from '../constants';
+import { bold } from 'ansi-colors';
 
 const CATEGORY_TAG_FOOD = "Food and Dining"
 const CATEGORY_TAG_TRANSFER = "Transfer"
@@ -13,6 +14,10 @@ const CATEGORY_TAG_INCOME = "Income"
 const CATEGORY_TAG_SHOPPING = "Shopping"
 const MIN_RANDOM = 100;
 const MAX_RANDOM = 100;
+
+const maleAvatar = require('../../assets/avatar-male.png')
+const femaleAvatar = require('../../assets/avatar-female.png')
+
 export default class Donate extends React.Component {
   state = {
     recipient: {
@@ -111,52 +116,60 @@ export default class Donate extends React.Component {
 
     const avatar =
       gender && gender === 'Male'
-        ? recipientsAvatar.male
-        : recipientsAvatar.female;
+        ? maleAvatar
+        : femaleAvatar;
 
     const formattedWorkActivity = workActivity === 'parttime' ? 'Part-time' : workActivity
     return (
-      <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
         <Avatar
           rounded
           size={200}
-          source={require('../../assets/avatar-male.png')}
+          source={avatar}
           containerStyle={styles.avatar}
         />
-        <Text h2 style={styles.text}>
+        <Text h2 style={styles.name}>
           {`${givenName} ${surname}`}
         </Text>
-        <View style={{textAlign: 'left'}}>
-          <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+        <View style={{textAlign: 'left', padding: 8}}>
+          <View style={{flexDirection: 'row', flexWrap: 'wrap', paddingBottom: 8}}>
             <Badge badgeStyle={styles.badge} textStyle={styles.badgeText} value={`${CATEGORY_TAG_FOOD} - ${categoryTags[CATEGORY_TAG_FOOD]}`} status="primary" />
             <Badge badgeStyle={styles.badge} textStyle={styles.badgeText} value={`${CATEGORY_TAG_TRANSFER} - ${categoryTags[CATEGORY_TAG_TRANSFER]}`} status="warning" />
             <Badge badgeStyle={styles.badge} textStyle={styles.badgeText} value={`${CATEGORY_TAG_INCOME} - ${categoryTags[CATEGORY_TAG_INCOME]}`} status="success" />
             <Badge badgeStyle={styles.badge} textStyle={styles.badgeText} value={`${CATEGORY_TAG_SHOPPING} - ${categoryTags[CATEGORY_TAG_SHOPPING]}`} status="error" />
           </View>
           <View style={{flexDirection: 'row'}}>
-            <Text style={styles.profileDetailTitle}>Income: </Text>
+            <Text style={styles.detailTitle}>Income: </Text>
             <NumberFormat value={totalIncome} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <Text style={styles.profileDetail}>{value}</Text>} />
           </View>
           <View style={{flexDirection: 'row'}}>
-            <Text style={styles.profileDetailTitle}>Work: </Text>
+            <Text style={styles.detailTitle}>Work: </Text>
             <Text style={styles.profileDetail}>{formattedWorkActivity}</Text>
           </View>
           <View style={{flexDirection: 'row'}}>
-            <Text style={styles.profileDetailTitle}>Living Arrangement: </Text>
+            <Text style={styles.detailTitle}>Living Arrangement: </Text>
             <Text style={styles.profileDetail}>{habitationStatus}</Text>
           </View>
           <View style={{flexDirection: 'row'}}>
-            <Text style={styles.profileDetailTitle}>School: </Text>
+            <Text style={styles.detailTitle}>School: </Text>
             <Text style={styles.profileDetail}>{schoolAttendance}</Text>
           </View>
+          <Text style={styles.bioTitle}>About me</Text>
+          <Text style={styles.bioDetail}>I served in the military for 20 years and I’m still suffering from PTSD and addiction. I’m on a waitlist to enter a rehab program, but I have nowhere to go until then. Anything you can give helps.</Text>
           <View style={styles.sliderContainer}>
+            <View style={{flexDirection: 'row'}}>
+              <Text style={styles.detailTitle}>Donation amount: </Text>
+              <Text style={styles.profileDetail}>{donationAmount}</Text>
+            </View>
             <Slider
               maximumValue={100}
+              thumbTintColor={colorVars.primaryColorTintMin}
+              maximumTrackTintColor={colorVars.primaryColorTintMax}
+              minimumTrackTintColor={colorVars.primaryColorTintMin}
               step={1}
               value={donationAmount}
               onValueChange={value => this.setState({ donationAmount: value })}
             />
-            <Text>Donation amount: {donationAmount}</Text>
           </View>
           {(submittingDonation && (
             <ActivityIndicator size="large" color={colorVars.primaryColor} />
@@ -169,7 +182,7 @@ export default class Donate extends React.Component {
             />
           )}
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -182,13 +195,13 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   avatar: {
-    marginTop: 62,
-    marginBottom: 32,
+    marginTop: 32,
+    marginBottom: 8,
   },
-  text: {
-    marginBottom: 10,
+  name: {
+    marginTop: 4,
   },
-  profileDetailTitle: {
+  detailTitle: {
     marginBottom: 10,
     fontWeight: 'bold',
   },
@@ -203,9 +216,18 @@ const styles = StyleSheet.create({
     backgroundColor: colorVars.primaryColor,
   },
   badge: {
-    margin: 4,
+    margin: 2,
   },
   badgeText: {
     padding: 16,
+  },
+  bioTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+  bioDetail: {
+    fontSize: 14,
+    marginBottom: 8,
   }
 });

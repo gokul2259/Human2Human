@@ -7,6 +7,7 @@ import QRScanner from './components/QRScanner'
 import HomeScreen from "./components/HomeScreen";
 import TDLoginScreen from "./components/TDLoginScreen";
 import Donate from "./components/Donate";
+import DonationSent from "./components/DonationSent";
 
 const AppNavigator = createStackNavigator(
   {
@@ -17,10 +18,13 @@ const AppNavigator = createStackNavigator(
       screen: TDLoginScreen
     },
     DonateFund: {
-      screen: Donate, 
+      screen: Donate,
     },
     QRScanner: {
       screen: QRScanner,
+    },
+    DonationSent: {
+      screen: DonationSent,
     }
   },
   {

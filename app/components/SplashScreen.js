@@ -7,7 +7,6 @@ import Splash from './Splash';
 
 export default class SplashScreen extends React.Component {
   async componentDidMount() {
-    await AsyncStorage.clear();
     await AsyncStorage.multiSet([['recipient', '']]);
 
     // redirect to QRScanner if already logged in

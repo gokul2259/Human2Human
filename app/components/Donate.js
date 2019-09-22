@@ -31,9 +31,7 @@ export default class Donate extends React.Component {
         <Avatar
           rounded
           size={200}
-          source={{
-            uri: `http://127.0.0.1:19001/${avatar}`
-          }}
+          source={require('../../assets/avatar-male.png')}
           containerStyle={styles.avatar}
         />
         <Text h2 style={styles.text}>{name}</Text>

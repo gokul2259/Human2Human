@@ -6,7 +6,6 @@ import NumberFormat from 'react-number-format';
 
 import { post } from "../utils/apiHelper";
 import { colorVars, recipientsAvatar } from '../constants';
-import { bold } from 'ansi-colors';
 
 const CATEGORY_TAG_FOOD = "Food and Dining"
 const CATEGORY_TAG_TRANSFER = "Transfer"

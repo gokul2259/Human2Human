@@ -75,6 +75,7 @@ export default class QRScanner extends React.Component {
 
       const { result } = customerResponse;
       await AsyncStorage.setItem("recipient", JSON.stringify(result));
+      await AsyncStorage.setItem("recipientAccountId", accountId);
       this.props.navigation.dispatch(
         StackActions.reset({
           index: 0,
@@ -83,8 +84,8 @@ export default class QRScanner extends React.Component {
       );
     } catch (exception) {
       alert(`Exception: ${JSON.stringify(exception)}`);
+      this.setState({ isFetching: false });
+      this.setState({ scanned: true });
     }
-    this.setState({ isFetching: false });
-    this.setState({ scanned: true });
   };
 }

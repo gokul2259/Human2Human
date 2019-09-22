@@ -41,7 +41,7 @@ export default class TDLoginScreen extends React.Component {
         setTimeout(redirectToQRScanner, 1000);
       })
       .catch(exception => {
-        alert(`Exception: ${JSON.stringify(exception)}`);
+        alert(`Failed to login, please try again`);
       })
       .then(() => {
         //this.setState({ fetchingCustomer: false });
@@ -57,7 +57,8 @@ export default class TDLoginScreen extends React.Component {
             Login
           </Text>
           <Text h4>
-            You can log in with TD if you bank with TD or you can log in with social media.
+            You can log in with TD if you bank with TD or you can log in with
+            social media.
           </Text>
         </View>
         {(fetchingCustomer && (
@@ -66,23 +67,15 @@ export default class TDLoginScreen extends React.Component {
           <View>
             <SocialIcon
               iconSize={0}
-              title='TD Login'
+              title="TD Login"
               onPress={this.onLogin}
               disabled={fetchingCustomer}
-              type='medium'
+              type="medium"
               button
             />
-            <SocialIcon
-              title='Facebook'
-              button
-              type='facebook'
-            />
+            <SocialIcon title="Facebook" button type="facebook" />
 
-            <SocialIcon
-              title='Twitter'
-              button
-              type='twitter'
-            />
+            <SocialIcon title="Twitter" button type="twitter" />
           </View>
         )}
       </View>
@@ -102,5 +95,5 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: colorVars.primaryColor,
     marginBottom: 64
-  },
+  }
 });

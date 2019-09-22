@@ -128,7 +128,7 @@ export default class Donate extends React.Component {
           containerStyle={styles.avatar}
         />
         <Text h2 style={styles.name}>
-          {`${givenName} ${surname}`}
+          {givenName && surname && `${givenName} ${surname}`}
         </Text>
         <View style={{textAlign: 'left', padding: 8}}>
           <View style={{flexDirection: 'row', flexWrap: 'wrap', paddingBottom: 8}}>

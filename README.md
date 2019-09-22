@@ -35,11 +35,17 @@ You are now ready to begin testing!
 
 ### Web
 
-1. Go to the [snack.expo.io](https://snack.expo.io/)
+1. Go to [snack.expo.io](https://snack.expo.io/)
 2. Click the three vertical ellipses to the right of the `Project` section header in the left navigation bar to open the project options and select `Import git repository`
 3. Enter the URL for this repo and click `Import repository`
 
 ## QR Codes for testing
+
+![c221770a-1b48-474a-8c3b-ba97585c406c](https://user-images.githubusercontent.com/5456509/65389486-d4303100-dd24-11e9-8feb-9ef5130229dd.png)
+
+![f6b013d8-17f1-4b7f-b3d8-342dd5443cfe](https://user-images.githubusercontent.com/5456509/65389492-dd210280-dd24-11e9-8a82-1a18c347d13a.png)
+
+![f24b9bc6-aad9-4f21-8e4d-bc30fb3d6c30](https://user-images.githubusercontent.com/5456509/65389493-e316e380-dd24-11e9-8228-b42b27efbe24.png)
 
 ## Troubleshooting
 

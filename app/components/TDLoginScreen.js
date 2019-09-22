@@ -38,7 +38,7 @@ export default class TDLoginScreen extends React.Component {
         // save in app state
         AsyncStorage.setItem("sender", JSON.stringify(response.result));
         // go to QRScanner
-        setTimeout(redirectToQRScanner, 2000);
+        setTimeout(redirectToQRScanner, 1);
       })
       .catch(exception => {
         alert(`Exception: ${JSON.stringify(exception)}`);
